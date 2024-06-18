@@ -1,6 +1,4 @@
-# 3D
-#
-# A simple 3D rasterization program that will render objects on a 2D screen.
+# 3D 
 
 import math
 import numpy as np
