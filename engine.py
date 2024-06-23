@@ -20,6 +20,8 @@ class Engine:
         self.fps = fps
         self.fov = fov
 
+        self.dt = None
+
         self.background_color = background_color
         
         self.running = False
@@ -57,7 +59,7 @@ class Engine:
         # Ran once before rendering
 
         # Set up projection
-        self.projection = Projection(screen_size=self.screen_size, aspect_ratio=self.aspect_ratio, fov=self.fov)
+        self.projection = Projection.Projection(screen_size=self.screen_size, aspect_ratio=self.aspect_ratio, fov=self.fov)
 
         # Set up draw
         self.draw = Draw.Draw(self.screen)
@@ -69,12 +71,19 @@ class Engine:
 
         # A cube
         self.mesh_cube = Primitives.Mesh(self.triangles)
-    
-    def update(self):
-        # Ran every render step
+
+        # To loop through all vectors in our mesh, and transform each of them
         for i in range(len(self.mesh_cube.triangles)):
             for j in range(len(self.mesh_cube.triangles[i].vectors)):
-                self.mesh_cube.triangles[i].vectors[j] = self.transformer.translate(self.mesh_cube.triangles[i].vectors[j], -1.25, -0.75, 2)
+                self.mesh_cube.triangles[i].vectors[j] = self.transformer.translate(self.mesh_cube.triangles[i].vectors[j], 0, 0, 3)
+    
+    def update(self):
+        # To loop through all vectors in our mesh, and transform each of them
+        for i in range(len(self.mesh_cube.triangles)):
+            for j in range(len(self.mesh_cube.triangles[i].vectors)):
+                self.mesh_cube.triangles[i].vectors[j] = self.transformer.translate(self.mesh_cube.triangles[i].vectors[j], 0, 0, -3)
+                self.mesh_cube.triangles[i].vectors[j] = self.transformer.rotate(self.mesh_cube.triangles[i].vectors[j], 0.5 * self.dt, 0, 1 * self.dt)
+                self.mesh_cube.triangles[i].vectors[j] = self.transformer.translate(self.mesh_cube.triangles[i].vectors[j], 0, 0, 3)
     
     def render(self):
         # Project cube's coordinates from 3D space to a 2D screen
@@ -92,6 +101,8 @@ class Engine:
         self.setup()
 
         while self.running:
+            self.dt = self.clock.tick(self.fps) / 1000
+
             self.event()
 
             self.update()
@@ -99,7 +110,5 @@ class Engine:
             self.render()
 
             pygame.display.update()
-
-            self.clock.tick(self.fps)
 
         pygame.quit()
