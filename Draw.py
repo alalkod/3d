@@ -11,4 +11,7 @@ class Draw:
     
     def mesh(self, mesh):
         for triangle in mesh.projected_mesh.triangles:
+            normal = triangle.normal()
+            if normal[2] <= 0:
+                continue
             self.triangle(triangle)

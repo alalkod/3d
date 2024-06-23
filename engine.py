@@ -44,15 +44,15 @@ class Engine:
 
             # West
             Primitives.Triangle([ [0, 0, 1], [0, 1, 1], [0, 1, 0] ]),
-            Primitives.Triangle([ [0, 1, 1], [0, 1, 0], [0, 0, 0] ]),
+            Primitives.Triangle([ [0, 0, 1], [0, 1, 0], [0, 0, 0] ]),
 
             # Top
             Primitives.Triangle([ [0, 1, 0], [0, 1, 1], [1, 1, 1] ]),
             Primitives.Triangle([ [0, 1, 0], [1, 1, 1], [1, 1, 0] ]),
 
             # Bottom
-            Primitives.Triangle([ [0, 0, 0], [0, 0, 1], [1, 0, 1] ]),
-            Primitives.Triangle([ [0, 0, 0], [1, 0, 1], [1, 0, 0] ])
+            Primitives.Triangle([ [1, 0, 1], [0, 0, 1], [0, 0, 0] ]),
+            Primitives.Triangle([ [1, 0, 1], [0, 0, 0], [1, 0, 0] ])
         ]
     
     def setup(self):
@@ -82,7 +82,7 @@ class Engine:
         for i in range(len(self.mesh_cube.triangles)):
             for j in range(len(self.mesh_cube.triangles[i].vectors)):
                 self.mesh_cube.triangles[i].vectors[j] = self.transformer.translate(self.mesh_cube.triangles[i].vectors[j], 0, 0, -3)
-                self.mesh_cube.triangles[i].vectors[j] = self.transformer.rotate(self.mesh_cube.triangles[i].vectors[j], 0.5 * self.dt, 0, 1 * self.dt)
+                self.mesh_cube.triangles[i].vectors[j] = self.transformer.rotate(self.mesh_cube.triangles[i].vectors[j], 0.5 * self.dt, 0.75 * self.dt, 1 * self.dt)
                 self.mesh_cube.triangles[i].vectors[j] = self.transformer.translate(self.mesh_cube.triangles[i].vectors[j], 0, 0, 3)
     
     def render(self):
