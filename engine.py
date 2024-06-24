@@ -5,7 +5,6 @@ import pygame
 import Transforms
 import Draw
 import Projection
-import Primitives
 
 pygame.init()
 
