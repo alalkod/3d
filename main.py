@@ -10,7 +10,11 @@ FOV = 90
 class Main(Engine.Engine):
     def __init__(self, screen_size: tuple, caption: str, background_color, fps: int = 60, fov: float = 90):
         super().__init__(screen_size, caption, background_color, fps, fov)
+    
+    def setup(self):
+        super().setup()
 
+        # Triangles for a mesh
         self.triangles = [
             # South
             Primitives.Triangle([ [0, 0, 0], [0, 1, 0], [1, 1, 0] ]),
@@ -36,11 +40,8 @@ class Main(Engine.Engine):
             Primitives.Triangle([ [1, 0, 1], [0, 0, 1], [0, 0, 0] ]),
             Primitives.Triangle([ [1, 0, 1], [0, 0, 0], [1, 0, 0] ])
         ]
-    
-    def setup(self):
-        super().setup()
 
-        # A cube mesh
+        # A cube mesh (uses the previously defined triangles)
         self.mesh_cube = Primitives.Mesh(self.triangles)
 
         # To loop through all vectors in our mesh, and transform each of them
