@@ -28,32 +28,6 @@ class Engine:
 
         pygame.display.set_caption(caption)
 
-        # Meshes
-        self.triangles = [
-            # South
-            Primitives.Triangle([ [0, 0, 0], [0, 1, 0], [1, 1, 0] ]),
-            Primitives.Triangle([ [0, 0, 0], [1, 1, 0], [1, 0, 0] ]),
-
-            # East
-            Primitives.Triangle([ [1, 0, 0], [1, 1, 0], [1, 1, 1] ]),
-            Primitives.Triangle([ [1, 0, 0], [1, 1, 1], [1, 0, 1] ]),
-
-            # North
-            Primitives.Triangle([ [1, 0, 1], [1, 1, 1], [0, 1, 1] ]),
-            Primitives.Triangle([ [1, 0, 1], [0, 1, 1], [0, 0, 1] ]),
-
-            # West
-            Primitives.Triangle([ [0, 0, 1], [0, 1, 1], [0, 1, 0] ]),
-            Primitives.Triangle([ [0, 0, 1], [0, 1, 0], [0, 0, 0] ]),
-
-            # Top
-            Primitives.Triangle([ [0, 1, 0], [0, 1, 1], [1, 1, 1] ]),
-            Primitives.Triangle([ [0, 1, 0], [1, 1, 1], [1, 1, 0] ]),
-
-            # Bottom
-            Primitives.Triangle([ [1, 0, 1], [0, 0, 1], [0, 0, 0] ]),
-            Primitives.Triangle([ [1, 0, 1], [0, 0, 0], [1, 0, 0] ])
-        ]
     
     def setup(self):
         # Ran once before rendering
@@ -66,29 +40,12 @@ class Engine:
 
         # Set up transforms
         self.transformer = Transforms.Transform()
-
-        # 3D objects go here
-
-        # A cube
-        self.mesh_cube = Primitives.Mesh(self.triangles)
-
-        # To loop through all vectors in our mesh, and transform each of them
-        for i in range(len(self.mesh_cube.triangles)):
-            for j in range(len(self.mesh_cube.triangles[i].vectors)):
-                self.mesh_cube.triangles[i].vectors[j] = self.transformer.translate(self.mesh_cube.triangles[i].vectors[j], 0, 0, 3)
     
     def update(self):
-        # To loop through all vectors in our mesh, and transform each of them
-        for i in range(len(self.mesh_cube.triangles)):
-            for j in range(len(self.mesh_cube.triangles[i].vectors)):
-                self.mesh_cube.triangles[i].vectors[j] = self.transformer.translate(self.mesh_cube.triangles[i].vectors[j], 0, 0, -3)
-                self.mesh_cube.triangles[i].vectors[j] = self.transformer.rotate(self.mesh_cube.triangles[i].vectors[j], 0.5 * self.dt, 0.75 * self.dt, 1 * self.dt)
-                self.mesh_cube.triangles[i].vectors[j] = self.transformer.translate(self.mesh_cube.triangles[i].vectors[j], 0, 0, 3)
+        pass
     
     def render(self):
-        # Project cube's coordinates from 3D space to a 2D screen
-        self.mesh_cube.projected_mesh = self.projection.mesh(self.mesh_cube)
-        self.draw.mesh(self.mesh_cube)
+        pass
 
     def event(self):
         for event in pygame.event.get():
