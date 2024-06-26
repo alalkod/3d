@@ -19,6 +19,8 @@ class Engine:
         self.fps = fps
         self.fov = fov
 
+        self.camera = [0, 0, 0]
+
         self.dt = None
 
         self.background_color = background_color
@@ -35,7 +37,7 @@ class Engine:
         self.projection = Projection.Projection(screen_size=self.screen_size, aspect_ratio=self.aspect_ratio, fov=self.fov)
 
         # Set up draw
-        self.draw = Draw.Draw(self.screen)
+        self.draw = Draw.Draw(self.screen, self.camera)
 
         # Set up transforms
         self.transformer = Transforms.Transform()
